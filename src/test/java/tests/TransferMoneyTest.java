@@ -1,6 +1,10 @@
+package tests;
+
+import data.DataHelper;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 import pages.LoginPageV1;
+
 
 import static com.codeborne.selenide.Selenide.open;
 
