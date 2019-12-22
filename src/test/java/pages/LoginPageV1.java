@@ -1,5 +1,7 @@
 package pages;
 
+import data.DataHelper;
+
 import static com.codeborne.selenide.Selenide.$;
 
 public class LoginPageV1 {
