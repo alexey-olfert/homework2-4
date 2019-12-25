@@ -17,8 +17,12 @@ public class TransferMoneyTest {
         val authInfo = DataHelper.getAuthInfo();
         val verificationPage = loginPage.validLogin(authInfo);
         val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
-        verificationPage.validVerify(verificationCode);
+        val dashboard = verificationPage.validVerify(verificationCode);
+        val cardReplenishmentPage = dashboard.replenishAccount1();
+        cardReplenishmentPage.makeDeposit();
 
     }
+
+
 
 }
