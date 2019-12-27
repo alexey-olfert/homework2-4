@@ -7,7 +7,7 @@ import org.openqa.selenium.Keys;
 import static com.codeborne.selenide.Selenide.$;
 
 public class CardReplenishmentPage {
-    private SelenideElement amount = $("[data-test-id=amount]");
+    private SelenideElement amount = $("span[data-test-id=amount]");
     private SelenideElement from = $("[data-test-id=from]");
     private SelenideElement transferButton = $("[data-test-id=action-transfer]");
 
