@@ -29,6 +29,8 @@ public class DataHelper {
     public static class CardsInfo{
         private String firstCard = "5559 0000 0000 0001";
         private String secondCard = "5559 0000 0000 0002";
+        private int startAmountValue = 10000;
+        private int amountValue = 200;
     }
 
 }

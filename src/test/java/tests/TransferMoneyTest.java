@@ -3,6 +3,7 @@ package tests;
 import data.DataHelper;
 import lombok.val;
 import org.junit.jupiter.api.Test;
+import pages.DashboardPage;
 import pages.LoginPageV1;
 
 
@@ -20,7 +21,8 @@ public class TransferMoneyTest {
         val dashboard = verificationPage.validVerify(verificationCode);
         val cardReplenishmentPage = dashboard.replenishAccount1();
         cardReplenishmentPage.makeDeposit();
-
+        DashboardPage.checkFirstAmount();
+        DashboardPage.checkSecondAmount();
     }
 
 
