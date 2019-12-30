@@ -16,7 +16,7 @@ public class CardReplenishmentPage {
         DataHelper.CardsInfo cardsInfo = new DataHelper.CardsInfo();
         amount.setValue(Integer.toString(cardsInfo.getAmountValue()));
         $("[data-test-id=from] input").sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-        from.setValue(cardsInfo.getFirstCard());
+        from.setValue(cardsInfo.getSecondCard());
         transferButton.click();
         return new DashboardPage();
     }

@@ -26,6 +26,12 @@ public class DashboardPage {
         return Integer.toString(amount);
     }
 
+    public static int setBalance() {
+        String text = $("div[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0']").text();
+        String balanceValue = text.replaceAll("\\D", "").substring(4);
+        return Integer.parseInt(balanceValue);
+    }
+
     public DashboardPage() {
         heading.shouldBe(Condition.visible);
     }
