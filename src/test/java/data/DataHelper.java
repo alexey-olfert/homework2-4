@@ -30,8 +30,32 @@ public class DataHelper {
     public static class CardsInfo{
         private String firstCard = "5559 0000 0000 0001";
         private String secondCard = "5559 0000 0000 0002";
-        private int startAmountValue = DashboardPage.setBalance();
         private int amountValue = 200;
+        private static int firstCardBalance;
+        private static int secondCardBalance;
+
+        public static int getFirstCardBalance() {
+            return firstCardBalance;
+        }
+
+        public static void setFirstCardBalance(int firstCardBalance) {
+            CardsInfo.firstCardBalance = firstCardBalance;
+        }
+
+        public static int getSecondCardBalance() {
+            return secondCardBalance;
+        }
+
+        public static void setSecondCardBalance(int secondCardBalance) {
+            CardsInfo.secondCardBalance = secondCardBalance;
+        }
+
     }
+
+    @Value
+    public static class Account {
+
+    }
+
 
 }

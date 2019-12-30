@@ -19,10 +19,12 @@ public class TransferMoneyTest {
         val verificationPage = loginPage.validLogin(authInfo);
         val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
         val dashboard = verificationPage.validVerify(verificationCode);
+        DataHelper.CardsInfo.setFirstCardBalance(DashboardPage.getCardBalance(DashboardPage.getFirstAccount()));
+        DataHelper.CardsInfo.setSecondCardBalance(DashboardPage.getCardBalance(DashboardPage.getSecondAccount()));
         val cardReplenishmentPage = dashboard.replenishAccount1();
         cardReplenishmentPage.makeDeposit();
-        DashboardPage.checkFirstAmount();
-        DashboardPage.checkSecondAmount();
+        DashboardPage.checkIncreasedAmount(DashboardPage.getFirstAccount());
+        DashboardPage.checkReducedAmount(DashboardPage.getSecondAccount());
     }
 
 

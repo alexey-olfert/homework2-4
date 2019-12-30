@@ -11,23 +11,36 @@ public class DashboardPage {
 
     private SelenideElement heading = $("[data-test-id=dashboard]");
     private SelenideElement topButton = $("div[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0'] button");
-    //private SelenideElement lowerButton = $("div[data-test-id^=0f3] button");
+    private SelenideElement lowerButton = $("div[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d'] button");
+    private static SelenideElement firstAccount = $("div[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0']");
+    private static SelenideElement secondAccount = $("div[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d']");
 
-    public static String getReducedAmount() {
+    public static String getIncreasedAmount(SelenideElement account) {
         DataHelper.CardsInfo cardsInfo = new DataHelper.CardsInfo();
-        int amount = cardsInfo.getStartAmountValue() - cardsInfo.getAmountValue();
-        return Integer.toString(amount);
+        int amount;
+        if (account==firstAccount) {
+            amount = DataHelper.CardsInfo.getFirstCardBalance() + cardsInfo.getAmountValue();
+        } else {
+            amount = DataHelper.CardsInfo.getSecondCardBalance() + cardsInfo.getAmountValue();
+        }
 
+        return Integer.toString(amount);
     }
 
-    public static String getIncreasedAmount() {
+    public static String getReducedAmount(SelenideElement account) {
         DataHelper.CardsInfo cardsInfo = new DataHelper.CardsInfo();
-        int amount = cardsInfo.getStartAmountValue() + cardsInfo.getAmountValue();
+        int amount;
+        if (account==firstAccount) {
+            amount = DataHelper.CardsInfo.getFirstCardBalance() - cardsInfo.getAmountValue();
+        } else {
+            amount = DataHelper.CardsInfo.getSecondCardBalance() - cardsInfo.getAmountValue();
+        }
+
         return Integer.toString(amount);
     }
 
-    public static int setBalance() {
-        String text = $("div[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0']").text();
+    public static int getCardBalance(SelenideElement account) {
+        String text = account.text();
         String balanceValue = text.replaceAll("\\D", "").substring(4);
         return Integer.parseInt(balanceValue);
     }
@@ -41,13 +54,20 @@ public class DashboardPage {
         return new CardReplenishmentPage();
     }
 
-    public static void checkFirstAmount() {
-        $("[data-test-id='92df3f1c-a033-48e6-8390-206f6b1f56c0']").shouldHave(text(DashboardPage.getIncreasedAmount()));
+    public static void checkIncreasedAmount(SelenideElement account) {
+        account.shouldHave(text(DashboardPage.getIncreasedAmount(account)));
     }
 
-    public static void checkSecondAmount() {
-        $("[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d']").shouldHave(text(DashboardPage.getReducedAmount()));
+    public static void checkReducedAmount(SelenideElement account) {
+        account.shouldHave(text(DashboardPage.getReducedAmount(account)));
+
     }
 
+    public static SelenideElement getFirstAccount() {
+        return firstAccount;
+    }
 
+    public static SelenideElement getSecondAccount() {
+        return secondAccount;
+    }
 }
