@@ -14,7 +14,7 @@ public class CardReplenishmentPage {
 
     public DashboardPage makeDeposit() {
         DataHelper.CardsInfo cardsInfo = new DataHelper.CardsInfo();
-        amount.setValue(Integer.toString(cardsInfo.getAmountValue()));
+        amount.setValue(Integer.toString(DataHelper.CardsInfo.getAmountValue()));
         $("[data-test-id=from] input").sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
         from.setValue(cardsInfo.getSecondCard());
         transferButton.click();

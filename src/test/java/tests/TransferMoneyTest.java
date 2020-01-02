@@ -21,6 +21,25 @@ public class TransferMoneyTest {
         val dashboard = verificationPage.validVerify(verificationCode);
         DataHelper.CardsInfo.setFirstCardBalance(DashboardPage.getCardBalance(DashboardPage.getFirstAccount()));
         DataHelper.CardsInfo.setSecondCardBalance(DashboardPage.getCardBalance(DashboardPage.getSecondAccount()));
+        DataHelper.CardsInfo.setAmountValue(200);
+        val cardReplenishmentPage = dashboard.replenishAccount1();
+        cardReplenishmentPage.makeDeposit();
+        DashboardPage.checkIncreasedAmount(DashboardPage.getFirstAccount());
+        DashboardPage.checkReducedAmount(DashboardPage.getSecondAccount());
+    } 
+
+    @Test
+    void shouldNotSendBigMoney() {
+        open("http://localhost:9999");
+        val loginPage = new LoginPageV1();
+        // можно заменить на val loginPage = open("http://localhost:9999", LoginPageV1.class);
+        val authInfo = DataHelper.getAuthInfo();
+        val verificationPage = loginPage.validLogin(authInfo);
+        val verificationCode = DataHelper.getVerificationCodeFor(authInfo);
+        val dashboard = verificationPage.validVerify(verificationCode);
+        DataHelper.CardsInfo.setFirstCardBalance(DashboardPage.getCardBalance(DashboardPage.getFirstAccount()));
+        DataHelper.CardsInfo.setSecondCardBalance(DashboardPage.getCardBalance(DashboardPage.getSecondAccount()));
+        DataHelper.CardsInfo.setAmountValue(DashboardPage.getCardBalance(DashboardPage.getSecondAccount()) + 1);
         val cardReplenishmentPage = dashboard.replenishAccount1();
         cardReplenishmentPage.makeDeposit();
         DashboardPage.checkIncreasedAmount(DashboardPage.getFirstAccount());

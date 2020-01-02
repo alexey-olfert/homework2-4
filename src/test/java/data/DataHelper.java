@@ -27,12 +27,21 @@ public class DataHelper {
     }
 
     @Value
-    public static class CardsInfo{
+    public static class CardsInfo {
+
         private String firstCard = "5559 0000 0000 0001";
         private String secondCard = "5559 0000 0000 0002";
-        private int amountValue = 200;
+        private static int amountValue;
         private static int firstCardBalance;
         private static int secondCardBalance;
+
+        public static int getAmountValue() {
+            return amountValue;
+        }
+
+        public static void setAmountValue(int amountValue) {
+            CardsInfo.amountValue = amountValue;
+        }
 
         public static int getFirstCardBalance() {
             return firstCardBalance;
@@ -49,11 +58,6 @@ public class DataHelper {
         public static void setSecondCardBalance(int secondCardBalance) {
             CardsInfo.secondCardBalance = secondCardBalance;
         }
-
-    }
-
-    @Value
-    public static class Account {
 
     }
 

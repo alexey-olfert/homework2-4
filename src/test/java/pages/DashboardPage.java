@@ -6,6 +6,7 @@ import data.DataHelper;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
+import static data.DataHelper.CardsInfo.getAmountValue;
 
 public class DashboardPage {
 
@@ -16,24 +17,22 @@ public class DashboardPage {
     private static SelenideElement secondAccount = $("div[data-test-id='0f3f5c2a-249e-4c3d-8287-09f7a039391d']");
 
     public static String getIncreasedAmount(SelenideElement account) {
-        DataHelper.CardsInfo cardsInfo = new DataHelper.CardsInfo();
         int amount;
         if (account==firstAccount) {
-            amount = DataHelper.CardsInfo.getFirstCardBalance() + cardsInfo.getAmountValue();
+            amount = DataHelper.CardsInfo.getFirstCardBalance() + getAmountValue();
         } else {
-            amount = DataHelper.CardsInfo.getSecondCardBalance() + cardsInfo.getAmountValue();
+            amount = DataHelper.CardsInfo.getSecondCardBalance() + getAmountValue();
         }
 
         return Integer.toString(amount);
     }
 
     public static String getReducedAmount(SelenideElement account) {
-        DataHelper.CardsInfo cardsInfo = new DataHelper.CardsInfo();
         int amount;
         if (account==firstAccount) {
-            amount = DataHelper.CardsInfo.getFirstCardBalance() - cardsInfo.getAmountValue();
+            amount = DataHelper.CardsInfo.getFirstCardBalance() - getAmountValue();
         } else {
-            amount = DataHelper.CardsInfo.getSecondCardBalance() - cardsInfo.getAmountValue();
+            amount = DataHelper.CardsInfo.getSecondCardBalance() - getAmountValue();
         }
 
         return Integer.toString(amount);
@@ -59,7 +58,12 @@ public class DashboardPage {
     }
 
     public static void checkReducedAmount(SelenideElement account) {
-        account.shouldHave(text(DashboardPage.getReducedAmount(account)));
+        int value = Integer.parseInt(DashboardPage.getReducedAmount(account));
+        if (value < 0) {
+            account.shouldHave(text("0"));
+        } else {
+            account.shouldHave(text(DashboardPage.getReducedAmount(account)));
+        }
 
     }
 
