@@ -29,7 +29,7 @@ public class TransferMoneyTest {
     } 
 
     @Test
-    void shouldNotSendBigMoney() {
+    void shouldNotChangeBalance() {
         open("http://localhost:9999");
         val loginPage = new LoginPageV1();
         // можно заменить на val loginPage = open("http://localhost:9999", LoginPageV1.class);

@@ -54,13 +54,23 @@ public class DashboardPage {
     }
 
     public static void checkIncreasedAmount(SelenideElement account) {
-        account.shouldHave(text(DashboardPage.getIncreasedAmount(account)));
+        int value = Integer.parseInt(DashboardPage.getReducedAmount(account));
+        if (value < 0 && account==firstAccount) {
+            account.shouldHave(text(Integer.toString(DataHelper.CardsInfo.getFirstCardBalance())));
+        } else if (value < 0 && account==secondAccount) {
+            account.shouldHave(text(Integer.toString(DataHelper.CardsInfo.getSecondCardBalance())));
+        } else {
+            account.shouldHave(text(DashboardPage.getIncreasedAmount(account)));
+        }
+
     }
 
     public static void checkReducedAmount(SelenideElement account) {
         int value = Integer.parseInt(DashboardPage.getReducedAmount(account));
-        if (value < 0) {
-            account.shouldHave(text("0"));
+        if (value < 0 && account==firstAccount) {
+            account.shouldHave(text(Integer.toString(DataHelper.CardsInfo.getFirstCardBalance())));
+        } else if (value < 0 && account==secondAccount) {
+            account.shouldHave(text(Integer.toString(DataHelper.CardsInfo.getSecondCardBalance())));
         } else {
             account.shouldHave(text(DashboardPage.getReducedAmount(account)));
         }
